@@ -23,30 +23,30 @@ DESC = (
     "and/or propagate gradients through analytical robot computations such as forward kinematics."
 )
 
-# resolve version
-latest_tag = (
-    subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"])
-    .decode("utf-8")
-    .strip("\n")
-)
-version_num = latest_tag.strip("v")
+# # resolve version
+# latest_tag = (
+#     subprocess.check_output(["git", "describe", "--tags", "--abbrev=0"])
+#     .decode("utf-8")
+#     .strip("\n")
+# )
+# version_num = latest_tag.strip("v")
 
-branch_name = (
-    subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
-    .decode("utf-8")
-    .strip("\n")
-)
-branch_hash = abs(hash(branch_name)) % (10**4)
+# branch_name = (
+#     subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+#     .decode("utf-8")
+#     .strip("\n")
+# )
+# branch_hash = abs(hash(branch_name)) % (10**4)
 
-rev_num = (
-    subprocess.check_output(["git", "rev-list", f"{latest_tag}..HEAD", "--count"])
-    .decode("utf-8")
-    .strip("\n")
-)
+# rev_num = (
+#     subprocess.check_output(["git", "rev-list", f"{latest_tag}..HEAD", "--count"])
+#     .decode("utf-8")
+#     .strip("\n")
+# )
 
-VERSION = version_num
-if int(rev_num) > 0:
-    VERSION = f"{version_num}a{rev_num}.dev{branch_hash}"
+# VERSION = version_num
+# if int(rev_num) > 0:
+#     VERSION = f"{version_num}a{rev_num}.dev{branch_hash}"
 
 # resource files
 data_files = []
@@ -72,7 +72,7 @@ for n in data_files:
 
 # dependencies
 install_requires = [
-    "torch >= 1.6",
+    "torch >= 1.0",
     "pyquaternion >= 0.9.9",
     "hydra-core >= 1.0.3",
     "urdf_parser_py >= 0.0.3",
@@ -83,7 +83,7 @@ install_requires = [
 # run setup
 setup(
     name="differentiable-robot-model",
-    version=VERSION,
+    version="1.0.0",
     description=DESC,
     long_description=README,
     long_description_content_type="text/markdown",
